@@ -35,6 +35,32 @@
   </head>
 
   <body>
+    <div
+      aria-live="polite"
+      aria-atomic="true"
+      style="
+        z-index: 99;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        min-height: 200px;
+        min-width: 400px;
+      "
+    >
+      <div
+        class="toast"
+        style="position: absolute; top: 0; right: 0;"
+        id="element"
+        data-delay="4000"
+      >
+        <div class="toast-header">
+          <strong class="mr-auto">Success</strong>
+        </div>
+        <div class="toast-body">
+          Welcome on board. You have been registered successfully.
+        </div>
+      </div>
+    </div>
     <div class="overlay"></div>
 
     <div
@@ -141,13 +167,6 @@
                   Request an invite!
                 </button>
               </form>
-              <!-- <form class="input-group input-group-newsletter" >
-              <input name="email" type="email" class="form-control" placeholder="Enter email..."
-                aria-label="Enter email..." aria-describedby="submit-button">
-              <div class="input-group-append">
-                <button class="btn btn-secondary" type="submit" id="submit-button">Request an invite!</button>
-              </div>
-            </form> -->
             </div>
           </div>
         </div>
@@ -156,17 +175,6 @@
 
     <div class="social-icons">
       <ul class="list-unstyled text-center mb-0">
-        <!-- <li class="list-unstyled-item">
-        <a href="#">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </li>
-      <li class="list-unstyled-item">
-        <a href="#">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-      </li> -->
-
         <li class="list-unstyled-item">
           <a href="https://wa.me/919051206790">
             <i class="fab fa-whatsapp"></i>
@@ -198,11 +206,10 @@
       form.addEventListener('submit', (e) => {
         e.preventDefault()
         fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          .then((response) => console.log('Success!', response))
+          .then((response) => $('#element').toast('show'))
           .catch((error) => console.error('Error!', error.message))
       })
     </script>
-
     <!-- Custom scripts for this template -->
     <script src="js/coming-soon.min.js"></script>
   </body>

@@ -40,7 +40,7 @@
       aria-atomic="true"
       style="
         z-index: 99;
-        position: absolute;
+        position: fixed;
         top: 1rem;
         right: 1rem;
         min-height: 200px;
@@ -204,10 +204,17 @@
       const form = document.forms['submit-to-google-sheet']
 
       form.addEventListener('submit', (e) => {
+        $('#submit-button').prop('disabled', true)
         e.preventDefault()
         fetch(scriptURL, { method: 'POST', body: new FormData(form) })
-          .then((response) => $('#element').toast('show'))
-          .catch((error) => console.error('Error!', error.message))
+          .then((response) => {
+            $('#submit-button').prop('disabled', false)
+            $('#element').toast('show')
+          })
+          .catch((error) => {
+            $('#submit-button').prop('disabled', false)
+            console.error('Error!', error.message)
+          })
       })
     </script>
     <!-- Custom scripts for this template -->
